@@ -24,5 +24,26 @@ simple_document_test() ->
     },
     check_result(ye_stream_parse:bin(Bin, State)).
 
+  
+parse_error_test() ->
+    Bin = <<"\n\n£">>,
+    check_result({parse_error, {
+                    {line, 3}, 
+                    {near, <<"£">>}, 
+                    {module, ye_stream_parse}, 
+                    {function, parse}
+                }},
+        ye_stream_parse:bin(Bin, #ye_cb_state{})).
+
+bad_return_test() ->
+    Bin = <<"---\n">>,
+    State = #ye_cb_state{
+        doc_begin = fun(_) -> [] end
+    },
+    ?assertError({bad_return, []}, ye_stream_parse:bin(Bin, State)).
+
+check_result(Expected, Result) ->
+    ?assertMatch(Expected, Result).
+
 check_result(State) ->
-    ?_assertMatch(State, []).
+    check_result([], State#ye_cb_state.state).
