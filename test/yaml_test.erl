@@ -5,7 +5,7 @@
 
 -define(SIMPLE_FILE, "../test/simple.yaml").
 
-simlpe_document_test() ->
+simple_document_test() ->
     {ok, Bin} = file:read_file(?SIMPLE_FILE),
     State = #ye_cb_state{
         state= [doc_begin, doc_end, {comment, <<"End document">>}],
