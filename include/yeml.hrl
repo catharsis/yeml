@@ -7,7 +7,7 @@
                 directives_end,
                 seq_begin,
                 seq_end,
-                mapping,
+                mapping_begin,
                 scalar,
                 comment
         }).

@@ -24,7 +24,7 @@ simple_document_test() ->
     },
     check_result(ye_stream_parse:bin(Bin, State)).
 
-  
+ 
 parse_error_test() ->
     Bin = <<"\n\n£">>,
     check_result({parse_error, {
